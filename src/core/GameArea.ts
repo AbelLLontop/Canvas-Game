@@ -1,4 +1,4 @@
-import LogicGame from "./interfaces/ILogicGame";
+import IControllerContext from "./interfaces/IControllerContext";
 
 class GameArea {
   canvas: HTMLCanvasElement;
@@ -11,26 +11,30 @@ class GameArea {
     this.context = this.canvas.getContext("2d") as CanvasRenderingContext2D;
     document.body.insertBefore(this.canvas, document.body.childNodes[0]);
   }
-  start(logicGame: LogicGame) {
-    this.runAnimationInterval(100, logicGame);
+  start(controllerContext: IControllerContext) {
+    this.runAnimationInterval(100, controllerContext);
     // this.runAnimationFrame(logicGame);
   }
-  runAnimationFrame(logicGame: LogicGame) {
+  runAnimationFrame(controllerContext: IControllerContext) {
     const run = () => {
-      logicGame.update();
+      controllerContext.update();
       this.context.fillStyle = "rgba(0, 0, 0, 0.1)";
       this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
-      logicGame.draw(this.context);
+      controllerContext.draw(this.context);
       requestAnimationFrame(run);
     };
     this.interval = requestAnimationFrame(run);
   }
-  runAnimationInterval(interval: number, logicGame: LogicGame) {
+  runAnimationInterval(
+    interval: number,
+    controllerContext: IControllerContext
+  ) {
     this.interval = setInterval(() => {
-      logicGame.update();
+      controllerContext.update();
       this.context.fillStyle = "rgba(0, 0, 0, 0.1)";
+      //  this.context.fillStyle = "rgba(0, 0, 0, 1)";
       this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
-      logicGame.draw(this.context);
+      controllerContext.draw(this.context);
     }, interval);
   }
 

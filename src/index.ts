@@ -1,12 +1,25 @@
+import CuartoMouseContext from "./Contexts/CuartoMouseContext";
 import PrincipalContext from "./contexts/PrincipalContext";
 import SecondContext from "./Contexts/SecondContext";
-import GameArea from "./GameArea";
+import TercertContexto from "./Contexts/TercerContexto";
+import GameArea from "./core/GameArea";
 
-import LogicGameArea from "./LogicGameArea";
+import ControllerContext from "./core/ControllerContext";
+
+import ListenerEvent from "./core/events/ListenerEvent";
 const gameArea = new GameArea();
-const logicGame = new LogicGameArea();
+const controllerContexts = new ControllerContext();
 
 const principalContext = new PrincipalContext();
 const secondContext = new SecondContext();
-logicGame.addElements([principalContext, secondContext]);
-gameArea.start(logicGame);
+const tercerContext = new TercertContexto();
+const cuartoMouseContext = new CuartoMouseContext();
+
+const eventMouseMove = new ListenerEvent("mousemove");
+const eventMouseClick = new ListenerEvent("click");
+eventMouseMove.suscribe(cuartoMouseContext);
+eventMouseClick.suscribe(cuartoMouseContext);
+
+
+controllerContexts.addContexts([cuartoMouseContext]);
+gameArea.start(controllerContexts);

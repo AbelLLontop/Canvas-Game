@@ -1,12 +1,15 @@
-import LogicGame from "../interfaces/ILogicGame";
+import IContexto from "../core/interfaces/IContexto";
 import NormalScuare from "../logic/NormalScuare";
 
-class PrincipalContext implements LogicGame {
+class PrincipalContext implements IContexto {
   scuare: NormalScuare;
   scuare2: NormalScuare;
   constructor() {
     this.scuare = new NormalScuare(0, 0, 100, 100, "red");
     this.scuare2 = new NormalScuare(0, 200, 100, 100, "red");
+  }
+  ejectEvent(event: Event): void {
+    
   }
 
   logicContext(){
@@ -21,7 +24,7 @@ class PrincipalContext implements LogicGame {
   update(): void {
     this.scuare.update();
     this.scuare2.update();
-    this.logicContext();
+     this.logicContext();
   }
   draw(ctx: CanvasRenderingContext2D): void {
     this.scuare.draw(ctx);

@@ -1,4 +1,4 @@
-import ILogicGame from "../interfaces/ILogicGame";
+import ILogicGame from "../core/interfaces/ILogicGame";
 import Scuare from "../models/Scuare";
 
 class NormalScuare extends Scuare implements ILogicGame {
